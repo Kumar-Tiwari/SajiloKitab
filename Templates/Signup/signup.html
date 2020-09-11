@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sajha Kitab - Signup</title>
+    <link rel="stylesheet" href="{% static 'Signup/css/signup.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Charmonman&display=swap" rel="stylesheet">
+</head>
+<body background="{% static 'Images/background.jpg' %}">
+    <div class="signup-container">
+        <div class="signup-form">
+            <div class="signup-forms">
+                <h1 class="site-title">Sajha Kitab </h1>
+                <div class="facebook-login">
+                    <div class="facebook-logo"><img src="{% static 'Images/facebook.png' %}"></div>
+                    <div class="facebook"><a href="#"><strong>Login with facebook</strong></a></div>    
+                </div>
+                <div class="login-or">
+                    <h5><span>or</span></h5>
+                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{form.first_name}}
+                    {{form.errors.first_name}}
+                    {{form.last_name}}
+                    {{form.errors.last_name}}
+                    {{form.email}}
+                    {{form.errors.email}}
+                    {{form.username}}
+                    {{form.errors.username}}
+                    {{form.password}}
+                    {{form.confirm_password}}
+                    {{form.errors.confirm_password}}
+                    <button type="submit"> Login</button>
+                </form>
+            </div>
+            <br>
+            <div class="create-account">
+                <p>Have a account ?</p><a href="{% url 'login' %}">Login</a>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

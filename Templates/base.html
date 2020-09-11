@@ -1,0 +1,58 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    {% block css %}{% endblock %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">   
+     <title>{% block title %}Base{% endblock %}</title>
+<body background="{% static 'Images/background.jpg' %}">                                <!-- NAVBAR -->
+    <header>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-sm" id="navbar">
+            <a class="navbar-brand logo1" href="{% url 'home' %}">
+              <img src="{% static 'Images/logo.png' %}" width="40" height="40" alt="logo" class="rounded-circle">
+              Sajha Kitab
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse profile-view" id="navbar-list-4">
+              <ul class="navbar-nav ml-auto ">
+                  <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle logo" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    {{request.user.first_name}} {{request.user.last_name}}
+                    {% for detail in request.user.profile_set.all %}
+                    <img src="/media/{{detail.profile_picture}}" width="30" height="30" class="rounded-circle"> 
+                    {% endfor %}
+                  </a>
+                  <div class="dropdown-menu " aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{% url 'profile' request.user.username %}">Profile</a>
+                    <a class="dropdown-item" href="{% url 'product' %}">Post an Ad</a>
+                    <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+                  </div>
+                </li>   
+              </ul>
+            </div>
+          </nav>
+    </header>
+    <div class="main-body">
+          {% block body %}
+
+
+          {% endblock %}
+    </div>
+    <!-- <div>
+        <footer id="main-footer">
+            <p>Sajha Kitab &copy; 2020, Kumar Tiwari.</p>
+        </footer>
+    </div> -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'Home/css/home.css' %}">
+{% endblock %}
+{% block title %}Sajha Kitab - Home {% endblock %}
+
+{% block body %}
+<body>
+
+    {% for product ,range,slides in allProds %}
+    <div class="container">
+        
+        <div class="row">
+            <div class="col-md-12">
+                <h2> <b></b>{{product.0.category}}</b></h2>
+                <div id="myCarousel{{forloop.counter}}" class="carousel slide" data-ride="carousel" data-interval="0">
+                <!-- Carousel indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel{{forloop.counter}}" data-slide-to="0" class="active"></li>
+                    {% for i in range %}
+                    <li data-target="#myCarousel{{forloop.parentloop.counter}}" data-slide-to="{{i}}"></li>
+                    {% endfor %}
+                </ol>   
+                <!-- Wrapper for carousel items -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="thumb-wrapper">
+                                    <div class="img-box">
+                                        <img src="/media/{{product.0.feature_image}}" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="thumb-content">
+                                        <h4>{{product.0.title}}</h4>
+                                        <p class="item-price"><span>{{product.0.price}}</span></p>
+                                        <a href="{% url 'detail' product.0.slug %}" class="btn btn-primary">Details</a>
+                                    </div>						
+                                </div>
+                            </div>
+                            {% for item in product|slice:"1:" %}
+                            <div class="col-sm-3 ">
+                                <div class="thumb-wrapper">
+                                    <div class="img-box">
+                                        <img src="/media/{{item.feature_image}}" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="thumb-content">
+                                        <h4>{{item.title}}</h4>
+                                        <p class="item-price"><span>{{item.price}}</span></p>
+                                        <a href="{% url 'detail' item.slug %}" class="btn btn-primary">Details</a>
+                                    </div>						
+                                </div>
+                            </div>
+                            {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last %}
+                        </div>
+                    </div>
+                    <div class="carousel-item ">
+                    <div class="row">
+                            {% endif %}     
+                            {% endfor %} 
+                </div>
+                </div>
+                <!-- Carousel controls -->
+                <a class="carousel-control-prev" href="#myCarousel{{forloop.counter}}" data-slide="prev">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                <a class="carousel-control-next" href="#myCarousel{{forloop.counter}}" data-slide="next">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+            </div>
+        </div>
+        
+    </div>
+    {% endfor %} 
+    </body>
+{% endblock %}

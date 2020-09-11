@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" media="screen and (min-width: 900px)" href="{% static 'Login/login.css' %}">
+    <link rel="stylesheet" media="screen and (max-width: 900px)" href="{% static 'Login/login1.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Charmonman&display=swap" rel="stylesheet">
+    <title>Sajha Kitab - Login</title>
+</head>
+<body background="{% static 'Images/background.jpg' %}">
+    {% if error %}
+    <script>
+        alert("Username or Password is incorrect");
+    </script>
+    {% endif %}
+
+
+    <div class="login-container">
+        <div class="login-photo">
+            <img class="login-image" src="{% static 'Images/Second Hand Books.png' %}">
+        </div>
+        <div class="login-form" >
+            <div class="login-forms">
+
+                <h1 class="site-title">Sajha Kitab </h1>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{message}}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <form method="POST">
+                    {% csrf_token %}
+                    {{form.username}}<br><br>
+                    {{form.password}}<br><br>
+
+                    <button type="submit"> Login</button>
+                </form>
+
+                <br>
+                <div class="login-or">
+                    <h5><span>or</span></h5>
+                </div>
+                <div class="facebook-login">
+                    <div class="facebook-logo"><img src="{% static 'Images/facebook.png' %}"></div>
+                    <div class="facebook"><a href="#"><strong>Login with facebook</strong></a></div>
+                    
+                </div>
+                <div class="forget-password">
+                    <a href="#">Forget password ?</a>
+                </div>
+            </div><br> 
+        <div class="create-account">
+            <p>Don't have a account ?</p><a href="{% url 'signup' %}">Sign Up</a>
+        </div>
+        </div> 
+    </div>
+</body>
+</html>

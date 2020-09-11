@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css  %} <link rel="stylesheet" href="{% static 'Profile/profile.css' %}">{% endblock %}
+{% block title %} Sajha Kitab-Profile{% endblock %}
+{% block body%}
+<section id="profile-view">
+    <div class="container">   
+        <div  class="name">
+                <br>
+            {% for detail in profile %}
+            <img src="/media/{{detail.profile_picture}}" width="200" height="230" class="rounded-circle"> 
+            {% endfor %}
+        </div>
+        <div class="name">
+                <h5>{{user.first_name}} {{user.last_name}}</h5>
+        </div>
+        <div class="jumbotron text-center">
+                <p align="left"><b>Email:</b> {{user.email}}</p>
+                {% for detail in profile %}
+                <p align="left"><b>Phone Number:</b> {{detail.phone_number}}</p>
+                {% endfor %}
+
+        </div>
+
+        <div class="jumbotron">
+                <h4 align="center">Posts By Author</h4>
+                <ol>
+                {% for items in product %}
+                        
+                                <li><a href="{% url 'detail' items.slug %}">{{items.title}}</a></li>
+                        
+                {% endfor %}
+                </ol>
+        </div>
+        <br><br>
+        </div>
+
+</section>
+
+{% endblock %}

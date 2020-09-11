@@ -1,0 +1,22 @@
+.product-post{
+    display: flex;
+    justify-content: space-evenly;
+    align-self: center;
+}
+.product-post-form{
+    border: 1px solid #c1c1d7;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding-top:3%;
+    padding-bottom: 2%;
+    padding-left:4%;
+    padding-right:4%;
+}
+.product-post-forms{
+    padding:1%;
+}
+.center-text{
+    text-align:center;
+}
+.personal-details{
+    padding:1%;
+}
